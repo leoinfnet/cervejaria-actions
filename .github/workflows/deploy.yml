@@ -1,20 +1,20 @@
-name: Only Tests
+name: Deploy to Prod
 on:
-  push:
+  pull_request:
     branches:
-      ["main"]
+      - prod
 jobs:
-  run-all-tests:
+  deploy-to-prod:
     runs-on: self-hosted
     steps:
+      - name:
       - name: git-checkout
         uses: actions/checkout@v4
-
       - name: Setup JAVA
         uses: actions/setup-java@v4
         with:
           java-version: 17
-          distribution: corretto
+          distribution: correto
 
       - name: SETUP MAVEN
         uses: stCarolas/setup-maven@v5
@@ -24,7 +24,10 @@ jobs:
         run: mvn clean
       - name: TEST ALL
         run: mvn test
-
-
-
-
+      - name: Notify Fail
+        if: ${{failure}}
+        run: echo "Testes falharam miseravelmente"
+      - name: Prepare jar
+        run: | 
+          mkdir -p ./app
+          cp ./target/cervejaria-acme-0.0.1-SNAPSHOT.jar ./app/run.jar
