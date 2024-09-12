@@ -10,7 +10,6 @@ jobs:
       - name:
       - name: git-checkout
         uses: actions/checkout@v4
-
       - name: Setup JAVA
         uses: actions/setup-java@v4
         with:
