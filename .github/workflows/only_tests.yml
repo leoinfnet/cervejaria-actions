@@ -1,0 +1,30 @@
+name: Only Tests
+on:
+  push:
+    branches:
+      ["main"]
+jobs:
+  run-all-tests:
+    runs-on: ubuntu:latest
+    steps:
+      - name: git-checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JAVA
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: correto
+
+      - name: SETUP MAVEN
+        uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: 3.9.5
+      - name: CLEAN
+        run: mvn clean
+      - name: TEST ALL
+        run: mvn test
+
+
+
+
