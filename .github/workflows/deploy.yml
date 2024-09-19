@@ -11,6 +11,14 @@ jobs:
       EC2_USERNAME: 'ec2-user'
     runs-on: self-hosted
     steps:
+      - name: SETUP MAVEN
+        uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: 3.9.5
+      - name: CLEAN
+        run: mvn clean
+      - name: BUILD
+        run: mvn package
 
       - name: Setup SSH for EC2
         uses: omarhosny206/setup-ssh-for-ec2@v1.0.0
