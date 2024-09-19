@@ -7,7 +7,7 @@ jobs:
   deploy:
     env:
       EC2_SSH_PRIVATE_KEY: ${{ secrets.TESTE }}
-      EC2_URL: 'ec2-user@ec2-54-90-104-90.compute-1.amazonaws.com'
+      EC2_URL: 'ec2-54-90-104-90.compute-1.amazonaws.com'
       EC2_USERNAME: 'ec2-user'
     runs-on: self-hosted
     steps:
