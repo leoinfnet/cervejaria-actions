@@ -48,3 +48,10 @@ jobs:
         with:
           username: 'leogloriainfnet'
           password: 'dckr_pat_A7SM5cSJP50vRqg-baxVkU_s43w'
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./docker
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: leogloriainfnet/cervejaria-acme:linux-latest
