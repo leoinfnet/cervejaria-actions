@@ -5,8 +5,25 @@ on:
       - prod
 jobs:
   deploy:
+    env:
+      EC2_SSH_PRIVATE_KEY: ${{ secrets.TESTE }}
+      EC2_URL: 'ec2-user@ec2-54-90-104-90.compute-1.amazonaws.com'
+      EC2_USERNAME: 'ec2-user'
     runs-on: self-hosted
     steps:
 
+      - name: Setup SSH for EC2
+        uses: omarhosny206/setup-ssh-for-ec2@v1.0.0
+        with:
+          EC2_SSH_PRIVATE_KEY: $EC2_SSH_PRIVATE_KEY
+          EC2_URL: $EC2_URL
       - name: Print Secret
         run: echo "My secret is ${{ secrets.TESTE }}"
+      - name: Setup SSH for EC2
+        uses: omarhosny206/setup-ssh-for-ec2@v1.0.0
+        with:
+          EC2_SSH_PRIVATE_KEY: $EC2_SSH_PRIVATE_KEY
+          EC2_URL: $EC2_URL
+
+      - name: Create a new file on the EC2 instance with "hello-world"
+        run: ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_URL "echo "hello-world" >> new_file.txt"
