@@ -7,20 +7,9 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - name: git-checkout
-        uses: actions/checkout@v4
 
-      - name: Setup JAVA
-        uses: actions/setup-java@v4
+      - name: Setup SSH for EC2
+        uses: omarhosny206/setup-ssh-for-ec2@v1.0.0
         with:
-          java-version: 17
-          distribution: corretto
-
-      - name: SETUP MAVEN
-        uses: stCarolas/setup-maven@v5
-        with:
-          maven-version: 3.9.5
-      - name: CLEAN
-        run: mvn clean
-      - name: TEST ALL
-        run: mvn test
+          EC2_SSH_PRIVATE_KEY: $EC2_SSH_PRIVATE_KEY
+          EC2_URL: $EC2_URL
