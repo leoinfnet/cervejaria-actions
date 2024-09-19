@@ -19,6 +19,10 @@ jobs:
         run: mvn clean
       - name: BUILD
         run: mvn package
+      - name: COPY
+        run: |
+          rm -f docker/app.jar
+          cp ./target/cervejaria-acme-0.0.1-SNAPSHOT.jar ./docker/app.jar
 
       - name: Setup SSH for EC2
         uses: omarhosny206/setup-ssh-for-ec2@v1.0.0
